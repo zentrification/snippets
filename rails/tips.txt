@@ -1,5 +1,17 @@
 ------------------------------------------------------------
-Activerecord
+Action View
+------------------------------------------------------------
+# data attributes shorthand
+tag("div", :data => {:name => 'Stephen', :city_state => %w(Chicago IL)})
+# => <div data-name="Stephen" data-city-state="[&quot;Chicago&quot;,&quot;IL&quot;]" />
+
+
+content_tag_for(:li, @posts) do |post|
+  ...
+end
+
+------------------------------------------------------------
+Active Record
 ------------------------------------------------------------
 class Activity < ActiveRecord::Base
   # Returns all the accounts that have unread messages.
@@ -8,19 +20,20 @@ class Activity < ActiveRecord::Base
   end
 
 
-published = Activity.published.select(:title).map(&:title)
-or
-published = Activity.published.pluck(:title)
-
-------------------------------------------------------------
-Rails 3.2
-------------------------------------------------------------
-
-content_tag_for(:li, @posts) do |post|
-  ...
-end
-
+# attr_accessible by role
+class Activity < ActiveRecord::Base
+  attr_accessible :title
+    attr_accessible :title, :published_at, :as => :admin
+  end
+...
+Activity.new(params[:activity], :as => :admin)
 
 # partial paths
 class Activity < ActiveRecord::Base
   def to_partial_path() "activities/#{kind}" end
+
+
+published = Activity.published.select(:title).map(&:title)
+or
+published = Activity.published.pluck(:title)
+
