@@ -1,0 +1,18 @@
+# Install
+############################################################
+
+add to Gemfile, bundle install & read their docs
+  gem 'queue_classic'
+  gem 'clockwork'
+
+cp lib/clockwork.rb to your rails app lib/
+cp script/* to your rails app script/
+
+configure lib/clockwork.rb with your tasks
+
+
+# Usage
+############################################################
+
+./script/clockwork
+./script/queue_classic
