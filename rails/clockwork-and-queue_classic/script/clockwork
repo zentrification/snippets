@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clockwork lib/clockwork.rb
