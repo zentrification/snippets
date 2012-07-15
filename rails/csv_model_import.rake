@@ -4,7 +4,7 @@
 # Note that your CSV needs to have a header line with the attribute names:
 #
 # http://erikonrails.snowedin.net/?p=212
-# ------------------------------
+############################################################
 desc "Import a CSV file into an ActiveRecord table: rake csv_model_import[data.csv,ModelName]"
 task :csv_model_import, [:filename, :model] => :environment do |task,args|
   lines = File.new(args[:filename]).readlines
@@ -19,3 +19,12 @@ task :csv_model_import, [:filename, :model] => :environment do |task,args|
     Module.const_get(args[:model]).create(params)
   end
 end
+
+
+# hrm also found this in a james edward gray II presentation
+############################################################
+
+# require 'csv'
+# CSV.foreach('csv_path_here', headers: true, header_converters: :symbol) do |row|
+#   Model.create(row.to_hash)
+# end
