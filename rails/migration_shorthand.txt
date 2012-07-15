@@ -1,0 +1,18 @@
+rails g resource user name:index email:uniq token:string{6} bio:text ninjas:belongs_to
+
+class CreateUser < ActiveRecord::Migration
+  def change
+    create_table :users do |t|
+      t.string :name
+      t.string :email
+      t.string :token, :limit => 6
+      t.text bio
+      t.belongs_to :ninja
+
+      t.timestamps
+    end
+    add_index :users, :name
+    add_index :users, :email, :unique => true
+    add_index :users, :ninja_id
+  end
+end
